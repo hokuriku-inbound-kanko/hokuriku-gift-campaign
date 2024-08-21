@@ -1,0 +1,1 @@
+# hokuriku-gift-campaign
