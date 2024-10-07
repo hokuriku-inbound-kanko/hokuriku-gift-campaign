@@ -44,5 +44,5 @@ fi
 # commit & push
 echo -e "${CYAN}upload to github${RESET}"
 git add -A
-git commit -m "?~_?~V update data"
+git commit -m "🤖 update data"
 git push
