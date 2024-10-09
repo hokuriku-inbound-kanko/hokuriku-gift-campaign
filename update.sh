@@ -18,6 +18,9 @@ echo -e "${CYAN}auto update hokuriku-gift-campain data${RESET}"
 # read dotenv
 eval "$(cat .env <(echo) <(declare -x))"
 
+# update repo
+git pull
+
 # get data with sftp
 cd daily
 DATE=$(date -d '1 days ago' '+%Y-%m-%d')
