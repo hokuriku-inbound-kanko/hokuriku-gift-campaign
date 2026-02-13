@@ -35,13 +35,26 @@ expect \"sftp>\"
 send \"quit\r\"
 "
 
-# convert shift-jis to utf-8
-echo -e "${CYAN}convert data charset${RESET}"
 cd ..
-deno run -A conv-charset.ts --path="daily/${DATE}.csv" --from=shift-jis
-if [ $? -ne 0 ]; then
-  echo -e "${RED}ERROR:${RESET} convert data failed"
-  exit 1
+
+# check download success
+if [ ! -f "daily/${DATE}.csv" ]; then
+    echo -e "${RED}ERROR:${RESET} Download failed or file not found: daily/${DATE}.csv"
+    exit 1
+fi
+
+if ! file -i "daily/${DATE}.csv" | grep -q "charset=utf-8"; then
+  # convert shift-jis to utf-8
+  echo -e "${CYAN}convert data charset${RESET}"
+  deno run -A conv-charset.ts --path="daily/${DATE}.csv" --from=shift-jis
+
+  if [ $? -ne 0 ]; then
+    echo -e "${RED}ERROR:${RESET} convert data failed"
+    exit 1
+  fi
+else
+  # skip convert 
+  echo -e "${CYAN}File is already UTF-8. Skipping conversion.${RESET}"
 fi
 
 # commit & push
