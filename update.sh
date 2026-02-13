@@ -36,6 +36,13 @@ send \"quit\r\"
 "
 
 cd ..
+
+# check download success
+if [ ! -f "daily/${DATE}.csv" ]; then
+    echo -e "${RED}ERROR:${RESET} Download failed or file not found: daily/${DATE}.csv"
+    exit 1
+fi
+
 if ! file -i "daily/${DATE}.csv" | grep -q "charset=utf-8"; then
   # convert shift-jis to utf-8
   echo -e "${CYAN}convert data charset${RESET}"
