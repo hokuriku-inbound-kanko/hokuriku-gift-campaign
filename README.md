@@ -1,12 +1,43 @@
 # hokuriku-gift-campaign
 
-<https://welcome-hokuriku.jp> で回答されたアンケートのデータをオープンデータとしたものです。
+日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
 
-[北陸インバウンド観光DX オープンデータ可視化ウェブアプリケーション](https://hokuriku-inbound-kanko.github.io/hokuriku-inbound-kanko-visualization/) で利用され、グラフとして閲覧可能になっています。
+Open tourism survey data collected via the [Hokuriku gift campaign](https://welcome-hokuriku.jp), conducted at tourist facilities in Toyama, Ishikawa, and Fukui prefectures using QR code surveys.
 
-本リポジトリは[北陸インバウンド観光DX・データコンソーシアム](https://github.com/hokuriku-inbound-kanko)によって公開されています。
+## Live Visualization
 
-## アンケートについて
+Explore interactive charts and insights at:
+[https://hokuriku-inbound-kanko.github.io/hokuriku-inbound-kanko-visualization/](https://hokuriku-inbound-kanko.github.io/hokuriku-inbound-kanko-visualization/)
 
-質問内容と回答の選択肢については以下の画像を参照下さい。
-![](questionnaire.jpg)
+## Data Collection
+
+Tourists scan QR codes at participating facilities in the Hokuriku region to submit surveys. Data reflects responses collected through the [welcome-hokuriku.jp](https://welcome-hokuriku.jp) campaign platform.
+
+## Data Format
+
+Daily CSV files are stored in `daily/YYYY-MM-DD.csv` (starting from 2024-09-01). Each file contains timestamped survey responses with standardized fields.
+
+## Key Survey Fields
+
+The dataset includes:
+
+- **Demographics**: Age, gender, nationality, household income
+- **Visit Context**: Purpose of visit, number of visits to Japan, travel companions, stay duration, total travel budget
+- **Information Sources**: Primary travel information sources, awareness channels for the campaign
+- **Spending & Satisfaction**: Facility-specific spending, overall satisfaction, likelihood to recommend
+- **Geographic & Operational Data**: Prefecture, area, industry type, facility visit purpose
+
+## Automatic Updates
+
+- Daily SFTP data pull at 3 AM JST from the campaign server
+- Automatic Shift-JIS to UTF-8 encoding conversion (if required)
+- Automated Git commit and push to GitHub via `update.sh`
+
+## Technology
+
+- **Automation**: Bash scripting (`update.sh`) with `expect` for SFTP interactions
+- **Data Conversion**: Deno-based `conv-charset.ts` for encoding normalization
+
+## License
+
+CC-BY 4.0 — [Hokuriku Inbound Tourism DX Data Consortium](https://github.com/hokuriku-inbound-kanko). Attribution required for reuse.
